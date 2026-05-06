@@ -141,7 +141,7 @@ void DSCkeybushome::publishTextState(const std::string &idstr, uint8_t num, std:
     void DSCkeybushome::set_panel_time()
     {
 #if defined(USE_TIME)
-      ESPTime rtc = id(esptime).now();
+      ESPTime rtc = esphome::time::global_real_time_clock->now();
       if (!rtc.is_valid())
         return;
       ESP_LOGI(TAG, "Setting panel time...");
@@ -1058,7 +1058,7 @@ void DSCkeybushome::setup()
       char s2[25];
 #if !defined(ARDUINO_MQTT) && defined(USE_TIME)
     
-      ESPTime rtc = id(esptime).now();
+      ESPTime rtc = esphome::time::global_real_time_clock->now();
       sprintf(s2, "[%02d-%02d-%02d %02d:%02d]", rtc.year, rtc.month, rtc.day_of_month, rtc.hour, rtc.minute);
 #endif
       for (int c = 0; c < len; c++)
